@@ -6,7 +6,7 @@ An AI-powered browser application with Ollama integration for local AI-driven se
 
 ## Features
 
-- **AI Chat** — Conversational AI interface with markdown rendering, powered by Ollama (llama3)
+- **AI Chat** — Conversational AI interface with markdown rendering, powered by Ollama (qwen2.5-coder:7b)
 - **Web Search** — Search the web and get AI-summarized results with source citations
 - **URL Analysis** — Paste any URL to get an AI-generated summary of the page content
 - **Dark/Light Theme** — Toggle between dark and light modes
@@ -19,7 +19,7 @@ An AI-powered browser application with Ollama integration for local AI-driven se
 
 - **Frontend:** React, Vite, Tailwind CSS, shadcn/ui, TypeScript
 - **Backend:** Express.js, Node.js
-- **AI Engine:** Ollama (llama3 model)
+- **AI Engine:** Ollama (qwen2.5-coder:7b model)
 - **Search:** DuckDuckGo HTML search (no API key required)
 
 ## Getting Started
@@ -35,8 +35,8 @@ An AI-powered browser application with Ollama integration for local AI-driven se
 # Install Ollama
 curl -fsSL https://ollama.com/install.sh | sh
 
-# Pull the llama3 model
-ollama pull llama3
+# Pull the qwen2.5-coder model
+ollama pull qwen2.5-coder:7b
 
 # Start Ollama server (if not already running)
 ollama serve

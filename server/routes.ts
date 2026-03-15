@@ -70,7 +70,7 @@ async function fetchPageContent(url: string): Promise<string> {
 async function streamOllamaChat(
   messages: { role: string; content: string }[],
   res: Response,
-  model: string = "llama3"
+  model: string = "qwen2.5-coder:7b"
 ) {
   try {
     const ollamaUrl = process.env.OLLAMA_URL || "http://localhost:11434";
@@ -156,10 +156,10 @@ function generateSimulatedResponse(query: string): string {
   }
 
   if (q.includes("what can you do") || q.includes("help") || q.includes("features")) {
-    return `## What I Can Do\n\nI'm NovaBrowser's AI assistant powered by Ollama (llama3). Here are my capabilities:\n\n- **Chat**: Ask me anything and I'll do my best to help\n- **Web Search**: I can search the web and summarize results for you\n- **URL Analysis**: Paste a URL and I'll read and analyze the page content\n- **Dark/Light Mode**: Toggle the theme using the button in the top bar\n\n### How to Use\n1. **Chat mode** (default): Just type your question\n2. **Search mode**: Click the 🔍 icon to search the web\n3. **URL mode**: Click the 🌐 icon and paste a URL to analyze\n\n*Note: For full AI capabilities, make sure Ollama is running locally with the llama3 model.*`;
+    return `## What I Can Do\n\nI'm NovaBrowser's AI assistant powered by Ollama (qwen2.5-coder:7b). Here are my capabilities:\n\n- **Chat**: Ask me anything and I'll do my best to help\n- **Web Search**: I can search the web and summarize results for you\n- **URL Analysis**: Paste a URL and I'll read and analyze the page content\n- **Dark/Light Mode**: Toggle the theme using the button in the top bar\n\n### How to Use\n1. **Chat mode** (default): Just type your question\n2. **Search mode**: Click the 🔍 icon to search the web\n3. **URL mode**: Click the 🌐 icon and paste a URL to analyze\n\n*Note: For full AI capabilities, make sure Ollama is running locally with the qwen2.5-coder:7b model.*`;
   }
 
-  return `I've received your message: "${query.slice(0, 100)}"\n\n**Note:** I'm running in demo mode because Ollama isn't connected yet. To enable full AI capabilities:\n\n1. Install Ollama from [ollama.com](https://ollama.com)\n2. Run \`ollama pull llama3\` to download the model\n3. Start Ollama with \`ollama serve\`\n4. Set the \`OLLAMA_URL\` environment variable if not using the default port\n\nOnce connected, I'll be able to provide intelligent responses, web search summaries, and page analysis!`;
+  return `I've received your message: "${query.slice(0, 100)}"\n\n**Note:** I'm running in demo mode because Ollama isn't connected yet. To enable full AI capabilities:\n\n1. Install Ollama from [ollama.com](https://ollama.com)\n2. Run \`ollama pull qwen2.5-coder:7b\` to download the model\n3. Start Ollama with \`ollama serve\`\n4. Set the \`OLLAMA_URL\` environment variable if not using the default port\n\nOnce connected, I'll be able to provide intelligent responses, web search summaries, and page analysis!`;
 }
 
 export function registerRoutes(server: Server, app: Express) {
@@ -202,7 +202,7 @@ export function registerRoutes(server: Server, app: Express) {
       sources: null,
     });
 
-    let systemPrompt = "You are NovaBrowser AI, a helpful assistant that provides clear, well-formatted responses using Markdown.";
+    let systemPrompt = "You are NovaBrowser AI, a helpful assistant powered by Qwen2.5-Coder. Provide clear, well-formatted responses using Markdown.";
     let userContent = message;
     let sources: { title: string; url: string }[] | null = null;
 
@@ -231,7 +231,7 @@ export function registerRoutes(server: Server, app: Express) {
       { role: "user", content: userContent },
     ];
 
-    const fullContent = await streamOllamaChat(ollamaMessages, res, model || "llama3");
+    const fullContent = await streamOllamaChat(ollamaMessages, res, model || "qwen2.5-coder:7b");
 
     // Save assistant message after streaming
     await storage.createMessage({

@@ -143,7 +143,7 @@ export default function BrowserPage() {
           conversationId: convId,
           message: userMessage,
           mode: inputMode,
-          model: "llama3",
+          model: "qwen2.5-coder:7b",
         }),
       });
 
@@ -441,7 +441,7 @@ export default function BrowserPage() {
             </div>
 
             <p className="text-[11px] text-muted-foreground mt-2 text-center">
-              NovaBrowser uses Ollama (llama3) for AI responses. Results may not always be accurate.
+              NovaBrowser uses Ollama (qwen2.5-coder:7b) for AI responses. Results may not always be accurate.
             </p>
           </div>
         </div>
